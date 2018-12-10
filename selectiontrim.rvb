@@ -1,0 +1,25 @@
+﻿Option Explicit
+'Script written by <insert name>
+'Script copyrighted by <insert company name>
+'Script version Wednesday, January 14, 2015 2:18:00 PM
+
+Sub SelectionTrim()
+	Const rhObjectCurve = 4
+
+	Dim arrGet0, arrGet1, arrResult
+
+	arrGet0 = Rhino.GetObjectEx("Select first curve to fillet", rhObjectCurve)
+
+	arrGet1 = Rhino.GetObjectEx("Select second curve to fillet", rhObjectCurve)
+
+	arrResult = Rhino.FilletCurves(arrGet0(0), arrGet0(3), arrGet1(0), arrGet1(3), 0, True)
+
+	If IsArray(arrResult) Then
+
+		Call Rhino.DeleteObject(arrGet0(0))
+
+		Call Rhino.DeleteObject(arrGet1(0))
+
+	End If
+
+End Sub

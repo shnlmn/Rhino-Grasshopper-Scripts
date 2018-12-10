@@ -1,0 +1,17 @@
+Option Explicit
+'Script written by <insert name>
+'Script copyrighted by <insert company name>
+'Script version Sunday, March 08, 2015 5:35:49 PM
+
+Call Main()
+Sub Main()
+	import rhinoscriptsyntax as rs
+
+	theObjs = rs.SelectedObjects()
+
+
+	For i In range(len(theObjs)):
+		obj = theObjs[i]]
+		block = rs.AddBlock(obj, (0, 0, 0), None, True)
+		rs.InsertBlock(block, (0, 0, 0))
+End Sub

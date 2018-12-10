@@ -1,0 +1,155 @@
+'Option Explicit
+'Script written by <insert name>
+'Script copyrighted by <insert company name>
+'Script version Friday, November 12, 2010
+
+
+Rhino.AddStartupScript Rhino.LastLoadedScriptFile
+Rhino.AddAlias "ProjectPersp", "_-Runscript (ProjectPersp)"
+Rhino.AddAlias "ProjectFromPt", "_-Runscript (ProjectFromPt)"
+
+' Call ProjectPersp()
+
+'Call ProjectFromPt()
+
+Sub ProjectFromPt()
+	
+	Dim aCrvs: aCrvs = Rhino.GetObjects("Select coplanar curves", 4,, True)
+	If Not isArray(aCrvs) Then Exit Sub
+	
+	Dim atargs: atargs = Rhino.GetObjects("Select target surfaces or polysurfaces", 8 + 16)
+	If Not isArray(atargs) Then Exit Sub
+	
+	Dim aPts: aPts = Rhino.GetPoints(True, False, "Set base point.", "Set projection direction.", 2)
+	If Not isArray(aPts) Then Exit Sub
+	If UBound(aPts) <> 1 Then Exit Sub
+	
+	Dim vecDir: vecDir = Rhino.VectorCreate(aPts(0), aPts(1))
+	Dim aPlane: aPlane = Rhino.PlaneFromNormal(apts(0), vecDir)
+	'drawPlaneFrame aPlane, 10
+	
+	Dim aBBCrv: aBBCrv = Rhino.BoundingBox(aCrvs, aPlane)
+	Dim aBBTarg: aBBTarg = Rhino.BoundingBox(aTargs, aPlane)
+	Dim TPlane: Tplane = array(aBBTarg(0), aPlane(1), aPlane(2), aPLane(3))
+	
+	'drawPlaneFrame TPlane, 10
+	Rhino.EnableRedraw False
+	
+	Dim CrvPlane: CrvPlane = array(aBBCrv(0), aPlane(1), aPlane(2), aPLane(3))
+	Dim aLine: aLine = Array(aPts(0), aPts(1))
+	Dim test: test = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, TPlane))
+	
+	Dim XformProj: xFormProj = Rhino.XformPlanarProjection(CrvPlane)
+	Dim Input: input = Rhino.TransformObjects(aCrvs, XformProj, True)
+	
+	Dim D1: D1 = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, TPLane))
+	Dim D2: D2 = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, CrvPLane))
+	Dim D3: D3 = QDistance(aBBCrv(0), aBBCrv(4))
+	Dim dblScale: dblScale = (D1 + (2 * D3)) / D2 
+	
+	'Dim dblScale: dblScale = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, TPLane)) / QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, CrvPLane)) * 1.25
+	
+	Dim aScale: aScale = Rhino.Scaleobjects(aCrvs, aLine(0), array(dblScale, dblScale, dblScale), True)
+	
+	
+	Dim sCrv, aExt, n
+	n = 0
+	ReDim aExt(UBound(aScale))
+	For Each sCrv In aScale
+		aExt(n) = Rhino.ExtrudeCurvePoint(sCrv, aPts(0))
+		n = n + 1
+	Next
+	
+	Dim sID
+	
+	For n = 0 To Ubound(aExt)
+		sID = sID & " _SelID " & aExt(n) 
+	Next
+	
+	sID = sID & " _Enter"
+	
+	For n = 0 To UBound(atargs)
+		sID = sID & " _SelID " & atargs(n) 
+	Next
+	sID = sID & " _Enter"
+	
+	Rhino.Command "_IntersectTwoSets " & sID 
+	
+	Rhino.DeleteObjects aScale
+	Rhino.DeleteObjects aExt
+	Rhino.DeleteObjects Input
+	
+	Rhino.EnableRedraw True
+	
+End Sub
+
+
+Sub ProjectPersp()
+
+	Dim aCam: aCam = Rhino.ViewCamera()
+	
+	Dim aCrvs: aCrvs = Rhino.GetObjects("Select coplanar curves", 4,, True)
+	If Not isArray(aCrvs) Then Exit Sub
+	
+	Dim sView: sView = Rhino.CurrentView()
+	
+	Dim atargs: atargs = Rhino.GetObjects("Select target surfaces or polysurfaces", 8 + 16)
+	If Not isArray(atargs) Then Exit Sub
+	
+	Dim aPlane: aPlane = Rhino.ViewCameraPlane(sView)
+	Dim aBBcrv: aBBCrv = Rhino.BoundingBox(aCrvs, aplane)
+	Dim aBBTarg: aBBTarg = Rhino.BoundingBox(aTargs, aPlane)
+
+	'	Dim Tplane: Tplane = Rhino.PlaneFromFrame(aBBtarg(0), aBbtarg(1), aBBtarg(3))
+	Dim Tplane: Tplane = array(aBBTarg(0), aPlane(1), aPlane(2), aPlane(3))
+	'Dim CrvPlane: CrvPlane = Rhino.PlaneFromFrame(aBBcrv(0), aBbcrv(1), aBBcrv(3))
+	Dim CrvPlane: CrvPlane = array(aBBCrv(0), aPlane(1), aPlane(2), aPLane(3))
+	'	TPlane = 
+	Dim aLine: aLine = Array(Rhino.ViewCamera(sView), Rhino.ViewCameraTarget(sView)(1))
+	'Rhino.AddLine aline(0), aLine(1)
+	Dim test: test = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, TPlane))
+	
+	Rhino.EnableRedraw False
+	
+	'Dim XformProj: xFormProj = Rhino.XformPlanarProjection(CrvPlane)
+	'Dim Input: Input = Rhino.TransformObjects(aCrvs, XformProj, True)
+	Dim D1: D1 = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, TPLane))
+	Dim D2: D2 = QDistance(aLine(0), Rhino.LinePlaneIntersection(aLine, CrvPLane))
+	Dim D3: D3 = QDistance(aBBCrv(0), aBBCrv(4))
+	Dim dblScale: dblScale = (D1 + (2 * D3)) / D2 
+	
+	Dim aScale: aScale = Rhino.Scaleobjects(aCrvs, aLine(0), array(dblScale, dblScale, dblScale), True)
+	
+	
+	Dim sCrv, aExt, n
+	n = 0
+	ReDim aExt(UBound(aScale))
+	For Each sCrv In aScale
+		aExt(n) = Rhino.ExtrudeCurvePoint(sCrv, aCam)
+		n = n + 1
+	Next
+	
+	Dim sID
+	
+	For n = 0 To Ubound(aExt)
+		sID = sID & " _SelID " & aExt(n) 
+	Next
+	
+	sID = sID & " _Enter"
+	
+	For n = 0 To UBound(atargs)
+		sID = sID & " _SelID " & atargs(n) 
+	Next
+	sID = sID & " _Enter"
+	
+	Rhino.Command "_IntersectTwoSets " & sID 
+	
+	Rhino.DeleteObjects aScale
+	Rhino.DeleteObjects aExt
+	'Rhino.DeleteObjects Input
+	Rhino.EnableRedraw True
+End Sub
+
+Function QDistance(aPtA, aPtB)
+	QDistance = Sqr((aPtA(0) - aPtB(0)) ^ 2 + (aPtA(1) - aPtB(1)) ^ 2 + (aPtA(2) - aPtB(2)) ^ 2)
+End Function

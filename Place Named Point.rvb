@@ -1,0 +1,25 @@
+Option Explicit
+
+'Script written by <insert name>
+'Script copyrighted by <insert company name>
+'Script version Friday, 08 July 2016 10:32:10
+
+Sub NamedPoint()
+
+	Dim arrPoint
+	Dim pointName
+	Dim placedPt
+	
+	pointName = Rhino.StringBox("Enter Point Name") 
+	
+	arrPoint = Rhino.GetPoint("Pick a point")
+	
+	If IsArray(arrPoint) Then
+
+		placedPt = Rhino.AddPoint(arrPoint)
+		Rhino.ObjectName placedPt, pointName
+
+	End If
+	
+	
+End Sub

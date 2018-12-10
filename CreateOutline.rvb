@@ -1,0 +1,35 @@
+﻿Option Explicit
+'Script written by Pascal
+'RMA
+'Script version Friday, December7, 2007
+
+Private oldDelete
+If IsEmpty(OldDelete) Then
+	OldDelete = "No"
+End If
+Sub CreateOutline
+	
+	
+	Dim aCrvs: aCrvs = Rhino.GetObjects("Select curves",4,True,True)
+	If Not isArray(aCrvs) Then Exit Sub
+	
+	Dim sDelete: sDelete = Rhino.GetString("Delete input?",oldDelete,array("All","Used", "None"))
+	If isNull(sDelete) Then Exit Sub
+	If Not Ubound(  Filter(array("All","Used", "None"), sDelete)) > -1 Then Exit Sub
+	OldDelete = sDelete
+	
+	Dim aBB: aBB = Rhino.BoundingBox(aCrvs,Rhino.CurrentView, False)
+	Dim aPt:apt = aBB(0)
+	Dim aPt2: apt2 = array(abb(0)(0)-10, abb(0)(1)-10, abb(0)(2))
+	Dim Plane: PLane = Rhino.ViewCPlane
+	apt = Rhino.XformCPlaneToWorld(aPt2, Plane)
+	Rhino.EnableRedraw(False)
+	Rhino.SelectObjects aCrvs
+	Rhino.Command "_CurveBoolean _DeleteInput=_" &sDelete &" " &Rhino.Pt2Str(aPt,,True) &"_Enter", False
+	Rhino.EnableRedraw(True)
+	
+	
+End Sub
+
+Rhino.AddAlias "CreateOutline", "_noEcho _-Runscript CreateOutline"
+Rhino.AddStartupScript Rhino.LastLoadedScriptFile
