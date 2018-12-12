@@ -23,6 +23,6 @@ if len(opobj) > 1:
 else:
     rs.BooleanDifference(opobj, cutBrep, False)
     rs.DeleteObject(opobj)
-        
+         
 rs.DeleteObject(cutBrep)
 rs.Redraw()

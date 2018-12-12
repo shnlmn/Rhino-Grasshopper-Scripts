@@ -3,7 +3,10 @@ Option Explicit
 'Version 21 March 2012
 'added current file name and folder default
 
-Call ExportSTLWithSettings()
+'Call ExportSTLWithSettings()
+
+Rhino.AddStartupScript Rhino.LastLoadedScriptFile
+
 
 Sub ExportSTLWithSettings()
 	

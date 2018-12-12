@@ -1,0 +1,133 @@
+﻿Z '_Zoom
+ze zoom extents
+ZEA '_Zoom _All _Extents
+ZS '_Zoom _Selected
+ZSA '_Zoom _All _Selected
+s stretch
+o offset
+p project
+m move
+U _Undo
+POn ! _PointsOn
+POff ! _PointsOff
+c copy
+W '_SelWindow
+COn '_CurvatureGraph
+COff '_CurvatureGraphOff
+PlugInManager ! _OptionsPage _PlugIns
+AdvancedDisplay ! _OptionsPage _AdvancedSettings
+DisplayAttrsMgr ! _OptionsPage _AdvancedSettings
+SelPolysurface '_SelPolysrf
+pl polyline
+ar array
+tr trim
+r rotate
+l line
+ex extend
+sp split
+op options
+di distance
+mm mirror
+ext extend
+x explode
+r3 rotate3d
+st stretch
+lo loft
+pr project
+de dupedge
+es edgesrf
+fs filletsrf
+co CreateOutline
+pa patch
+sc scale
+f fillet
+re rectangle p
+os offsetsrf
+exs extrudesrf
+prc projecttocplane
+exp export
+ps planarsrf
+boodif BooleanDifference
+sc1 Scale1D
+sc2 Scale2d
+exc ExtrudeCrv
+booun BooleanUnion SelLast MergeAllFaces
+boosp BooleanSplit
+booint BooleanIntersection
+maf MergeAllFaces
+dst Distance
+psrf PlanarSrf
+dfe DupFaceBorder
+wc WireCut
+Aliases ! _OptionsPage _Aliases
+scn ScaleNU
+s1 Scale1D
+s2 Scale2D
+sn ScaleNU
+ap ArrayPolar
+CC CloseCRV
+CreateOutline _noEcho _-Runscript CreateOutline
+Isolate _NoEcho _-Runscript (Isolate)
+Unisolate _NoEcho _-Runscript (Unisolate)
+IsolateLock _NoEcho _-Runscript (IsolateLock)
+UnisolateLock _NoEcho _-Runscript (UnisolateLock)
+IsolateLayer _NoEcho _-Runscript (IsolateLayer)
+UnIsolateLayer _NoEcho _-Runscript (UnIsolateLayer)
+Distribute _NoEcho _-Runscript (Distribute)
+ClippingPlaneCurves _NoEcho _-Runscript (ClippingPlaneCurves)
+DivideLengthX ! _-RunScript DivideLengthX
+ExtractUnderlyingSrfs _NoEcho _-RunScript (ExtractUnderlyingSrfs)
+UnderlyingSrf _NoEcho _-RunScript (UnderlyingSrf)
+FaceCamera _NoEcho _-Runscript (FaceCamera)
+IntersectPlane _NoEcho _-Runscript IntersectPlane
+TrimWithPlane _NoEcho _-Runscript TrimWithPlane
+SplitWithPlane _NoEcho _-Runscript SplitWithPlane
+BooleanSplitWithPlane _NoEcho _-Runscript BooleanSplitWithPlane
+MoveProject ! _noEcho _-Runscript MoveProject
+MoveProjectEach _noEcho _-Runscript MoveProjectEach
+SilhouetteEyePt _-Runscript (SilhouetteEyePt)
+pt Point
+al ArrayLinear
+cb CurveBoolean
+FF '_CPlane _Surface _Pause _Pause _Pause _Enter _OrientCameraToSrf _Pause _-ViewportProperties _Projection _Parallel _Enter
+cro CreateOutline
+etsPanels _-RunScript ET_Panels
+etsPlanarPanels _-RunScript ET_PlanarPanels
+etsBeams _-RunScript ET_BeamSubstructure
+etsPipeSubstructure _-RunScript ET_PipeSubstructure
+etsPolylineVerticesCoplanar _-RunScript ET_PolylineVerticesCoplanarUi
+etsDiagonalVerticesCoplanar _-RunScript ET_DiagonalVerticesCopUi
+etsPanelLayout _-RunScript ET_PanelLayout
+etsUnDensify _-RunScript ET_MinEdgeLengthDeletePolylines
+etsDensify _-RunScript ET_MaxEdgeLengthLoopCutting
+etsCreaseBetweenEdges _-RunScript ET_CreaseBetweenEdgesUi
+etsInfo _-RunScript ET_InfoUi
+etsAddPolyFace _-RunScript ET_AddPolyFace
+etsAddPolyFaceTest _-RunScript ET_AddPolyFaceHelperTest
+ProjectPersp _-Runscript (ProjectPersp)
+ProjectFromPt _-Runscript (ProjectFromPt)
+ll lasso
+gh Grasshopper
+eb ExplodeBlock
+bm BlockManager
+pd PrintDisplay s t _enter
+sa SaveAs
+xs ExtractSrf
+da DimAligned
+sf splitface
+at Hatch
+fz fillet _r 0
+movelayer _NoEcho _-RunPythonScript ("C:\Users\sleaman\Google Drive\Rhino Accessories\Rhino Scripts\moveObjectsandLayers.py")
+cl _NoEcho _-RunPythonScript ("C:\Users\sleaman\Google Drive\Rhino Accessories\Rhino Scripts\ChangeLayer.py")
+mtl _NoEcho _-RunPythonScript ("C:\Users\sleaman\Google Drive\Rhino Accessories\Rhino Scripts\MoveLayersToOtherParentS.py")
+UpdateBlock _NoEcho _-Runscript (UpdateAllLinkedBlocks)
+selwall _NoEcho _-RunPythonScript ("C:\Users\sleaman\Google Drive\Rhino Accessories\Rhino Scripts\SELECT A-WALL.py")
+pnp _NoEcho _-Runscript NamedPoint
+tb TestZBiasFactor 0.001 _Enter
+evb _NoEcho _-RunPythonScript ("C:\Users\sleaman\Google Drive\Rhino Accessories\Rhino Scripts\createElevationBug.py")
+vc -ViewCapturetoFile
+cp '_CutPlane _Pause _p
+ulgh GrasshopperUnloadPlugin
+bs BooleanSplit
+TX TEXT
+stl !_-RunScript (ExportSTLWithSettings)
