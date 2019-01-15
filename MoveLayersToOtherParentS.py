@@ -32,9 +32,10 @@ destinationLayer = rs.CheckListBox(topList)
 rs.EnableRedraw(enable=False)
 for obj in sourceObjects:
     objLayer = rs.ObjectLayer(obj)
-    
-    parent, child = objLayer.split("::")[-2:]
-
+    try:
+        parent, child = objLayer.split("::")[-2:]
+    except:
+        pass
         
     for dLayer in destinationLayer:
         if dLayer[1] == True:

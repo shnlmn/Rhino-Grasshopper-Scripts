@@ -5,7 +5,7 @@ Option Explicit
 
 'Call ExportSTLWithSettings()
 
-Rhino.AddStartupScript Rhino.LastLoadedScriptFile
+'Rhino.AddStartupScript Rhino.LastLoadedScriptFile()
 
 
 Sub ExportSTLWithSettings()
@@ -20,7 +20,7 @@ Sub ExportSTLWithSettings()
 	filt = "STL Files (*.stl)|*.stl||"
 	
 	If Not IsNull(strCurrDN) Then
-		strSaveDN =Left(strCurrDN,Len(strCurrDN)-3)&"stl"
+		strSaveDN = Left(strCurrDN, Len(strCurrDN) - 3) & "stl"
 		strFileName = Rhino.SaveFileName("Export STL", filt, strCurrDP, strSaveDN)
 	Else
 		strFileName = Rhino.SaveFileName("Export STL", filt)
@@ -52,7 +52,7 @@ Function STLSettings()
 	str4 = "_UseSimpleParameters=_No "
 	str5 = "_Enter _DetailedOptions "
 	str6 = "_JaggedSeams=_No "
-	str7 = "_PackTextures=_No "
+	str7 = "_PackTextures=_No "z
 	str8 = "_Refine=_Yes "
 	str9 = "_SimplePlane=_No "
 	str10 = "_Weld=_No "
