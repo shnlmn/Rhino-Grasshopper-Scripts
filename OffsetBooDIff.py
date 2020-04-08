@@ -2,6 +2,8 @@ import rhinoscriptsyntax as rs
 import Rhino
 import scriptcontext as sc
 
+cutterError = False
+
 ### Get objects to cut with, place in dictionary with information about object ###
 opobj = rs.GetObjects(message="Select objects to remove from.", filter=16)
 op_dict = {}
@@ -16,10 +18,13 @@ offset = rs.GetReal(message="Offset Distance", number = 0.4) # default offset va
 cutBreps = []
 
 for o in diffobjsarray:
-    out_brep, out_blends, out_walls = Rhino.Geometry.Brep.CreateOffsetBrep(o, offset, False, True, .001) #CreateOffsetBrep returns a list, for some reason
-    offsetobjs = sc.doc.Objects.AddBrep(out_brep[0]) # add the brep to the document
-    cutBreps.append(offsetobjs) # Add the brep to a list of cutters
-
+    out_brep, out_blends, out_walls = Rhino.Geometry.Brep.CreateOffsetBrep(o, offset, False, False, .001) #CreateOffsetBrep returns a list, for some reason
+    try:
+        offsetobjs = sc.doc.Objects.AddBrep(out_brep[0]) # add the brep to the document
+        cutBreps.append(offsetobjs) # Add the brep to a list of cutters
+    except IndexError:
+        cutterError = True
+        
 for object in op_dict.keys():
     for cutter in cutBreps:
 #        print(op_dict[object]["Object"], cutter)
@@ -36,3 +41,6 @@ for object in op_dict.keys():
 for cutBrep in cutBreps:
     rs.DeleteObject(cutBrep)
 rs.Redraw()
+
+if cutterError:
+    print("Some objects failed to offset.")

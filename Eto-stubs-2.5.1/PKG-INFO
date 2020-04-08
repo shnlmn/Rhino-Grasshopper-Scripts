@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: Eto-stubs
+Version: 2.5.1
+Summary: Stubs for Eto
+Home-page: https://github.com/mcneel/pythonstubs
+Author: Robert McNeel & Associates
+Author-email: steve@mcneel.com
+License: UNKNOWN
+Description: 
+        # Eto-stubs
+        Stubs for Eto
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Description-Content-Type: text/markdown
